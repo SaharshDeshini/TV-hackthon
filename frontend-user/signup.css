@@ -1,0 +1,295 @@
+/* General Body and Container Styling */
+body {
+    font-family: 'Poppins', sans-serif; /* A more modern, clean font */
+    background: linear-gradient(135deg, #a777e3 0%, #764ba2 100%); /* Deeper, more vibrant purple gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+    overflow: hidden; /* Hide potential scrollbars */
+    perspective: 1000px; /* For 3D transformations */
+}
+
+/* Background Animated Circles/Shapes (Pure CSS) */
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px); /* Soft blur effect */
+    opacity: 0.6;
+    animation: moveShapes 15s infinite alternate ease-in-out;
+    z-index: -1; /* Keep behind content */
+}
+
+body::before {
+    width: 200px;
+    height: 200px;
+    background-color: #ff9a8d; /* Warm color */
+    top: 10%;
+    left: 15%;
+}
+
+body::after {
+    width: 300px;
+    height: 300px;
+    background-color: #8be8e5; /* Cool color */
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 2s; /* Stagger the animation */
+}
+
+@keyframes moveShapes {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, 50px) scale(1.1); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+
+/* Authentication Card Styling */
+.auth-card {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    backdrop-filter: blur(15px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(15px); /* For Safari */
+    padding: 50px; /* More generous padding */
+    padding-bottom: 0; /* Adjust padding bottom as footer will be outside */
+    border-radius: 20px 20px 0 0; /* Top rounded corners only */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Deeper, more prominent shadow */
+    text-align: center;
+    width: 100%;
+    max-width: 450px; /* Slightly wider card */
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d; /* For potential 3D effects */
+    animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Bouncy entrance */
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Heading Styling */
+.auth-card h2 {
+    color: #4a148c; /* Deeper purple for heading */
+    margin-bottom: 35px;
+    font-size: 2.5em; /* Larger heading */
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* More space between form elements */
+}
+
+/* Label Styling */
+label {
+    text-align: left;
+    font-size: 1em; /* Slightly larger labels */
+    color: #6a1b9a; /* Darker purple for labels */
+    margin-bottom: -5px; /* Pull label closer to input */
+    font-weight: 600;
+}
+
+/* Input Field Styling */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px; /* More rounded inputs */
+    font-size: 1.1em;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+    box-sizing: border-box;
+    background-color: #fcfcfc; /* Slightly off-white background */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #8e24aa; /* Vibrant purple on focus */
+    box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.2); /* Glow effect */
+    outline: none;
+    background-color: #fff;
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background: linear-gradient(45deg, #8e24aa 0%, #d81b60 100%); /* Vibrant purple to red gradient */
+    color: white;
+    padding: 16px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em; /* Larger text */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-top: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger button shadow */
+    text-transform: uppercase; /* Make text uppercase */
+    width: 100%; /* Make it take full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #d81b60 0%, #8e24aa 100%); /* Reverse gradient on hover */
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Separator Styling */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 30px 0; /* Space above and below separator */
+    color: #999;
+    font-size: 0.9em;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .5em;
+}
+
+/* Google Login Button Styling (Modified for size) */
+.btn-google {
+    background-color: #ffffff;
+    color: #4285F4; /* Google blue */
+    padding: 16px 30px; /* Match padding of primary button */
+    border: 1px solid #e0e0e0;
+    border-radius: 10px; /* Match radius of primary button */
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 0; /* Adjust margin as separator handles spacing */
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Make it take full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.btn-google:hover {
+    background-color: #f8f8f8;
+    border-color: #c5c5c5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.btn-google img {
+    width: 22px;
+    height: 22px;
+}
+
+/* Auth Status Message */
+#auth-status {
+    margin-top: 25px;
+    font-size: 1em;
+    color: #e74c3c;
+    min-height: 24px; /* Ensure space for messages */
+    font-weight: 500;
+    opacity: 0; /* Hidden by default, JavaScript will manage visibility */
+    transition: opacity 0.3s ease-out;
+}
+
+#auth-status.visible {
+    opacity: 1;
+}
+
+/* Input Error Feedback */
+.input-error {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2) !important;
+}
+
+
+/* Auth Footer Container Styling (New - for the signup area) */
+.auth-footer-container {
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); /* Light gray gradient */
+    margin-top: 40px; /* Space between card content and footer */
+    padding: 25px 50px; /* Padding for the new footer area */
+    border-radius: 0 0 20px 20px; /* Bottom rounded corners */
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.05); /* Subtle inner shadow for depth */
+    width: calc(100% + 100px); /* Extend to match card width + padding */
+    margin-left: -50px; /* Pull left to cover previous padding */
+    margin-right: -50px; /* Pull right */
+    box-sizing: border-box;
+}
+
+.auth-footer {
+    font-size: 1em;
+    color: #6a1b9a; /* Darker purple */
+    font-weight: 500;
+}
+
+.auth-footer a {
+    color: #4a148c;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+    color: #6a1b9a;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 500px) {
+    .auth-card {
+        margin: 20px;
+        padding: 40px 30px;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .auth-card h2 {
+        font-size: 2em;
+    }
+
+    .btn-primary, .btn-google {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+
+    .auth-footer-container {
+        padding: 20px 30px;
+        border-radius: 0 0 15px 15px;
+        width: calc(100% + 60px); /* Adjust for 30px padding on each side */
+        margin-left: -30px;
+        margin-right: -30px;
+    }
+}
