@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TEST - History</title>
+  <style>
+    /* All your CSS is the same */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+    :root { --primary-color: #00aaff; --dark-color: #1a1a1a; --light-color: #f4f4f4; --overlay-color: rgba(0, 0,0, 0.75); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: var(--light-color); background-color: var(--dark-color); }
+    .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; align-items: center; }
+    .chatbot-btn { background: rgba(255, 255, 255, 0.1); color: var(--light-color); border: 1px solid rgba(255, 255, 255, 0.3); padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 16px; text-decoration: none; }
+    .content-wrapper { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; min-height: 100vh; padding: 80px 20px 20px; }
+    header h1 { color: #00d4ff; margin-bottom: 30px; }
+    .history-list { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
+    .issue-card { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; padding: 20px; display: flex; gap: 20px; text-align: left; }
+    .issue-card img { width: 150px; height: 150px; object-fit: cover; border-radius: 5px; }
+    .issue-card-details h3 { color: var(--primary-color); margin-bottom: 10px; text-transform: capitalize; }
+    .issue-card-details p { margin-bottom: 5px; }
+    .issue-card-details .date { font-size: 0.9rem; color: #ccc; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="top-controls">
+    <a href="dashboard.html" class="chatbot-btn">🏠 Go to Dashboard</a>
+  </div>
+  <div class="content-wrapper">
+    <header>
+      <h1>My Submission History (Test Page)</h1>
+    </header>
+    <main id="history-container" class="history-list">
+      <p>Loading...</p>
+    </main>
+  </div>
+
+  <script type="module">
+    // =========================================================================
+    // START: ALL OF AUTH.JS IS PASTED HERE
+    // =========================================================================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { getFirestore, collection, query, where, orderBy, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    // NOTE: Other functions are removed as they aren't needed for this test page
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDa23nbzWusBuW2_uPzMErdbb158GXoBbI",
+      authDomain: "maintenance-ai-8613c.firebaseapp.com",
+      projectId: "maintenance-ai-8613c",
+      storageBucket: "maintenance-ai-8613c.firebasestorage.app",
+      messagingSenderId: "1019313438020",
+      appId: "1:1019313438020:web:0190ace62338e88e0eab11",
+      measurementId: "G-ZWQH8E1KVW"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    
+    // =========================================================================
+    // START: THE HISTORY PAGE SCRIPT LOGIC IS HERE
+    // =========================================================================
+    const historyContainer = document.getElementById('history-container');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        await fetchUserHistory(user);
+      } else {
+        historyContainer.innerHTML = '<h2>Please log in to see your history.</h2><p><a href="login.html">Go to Login Page</a></p>';
+      }
+    });
+
+    async function fetchUserHistory(user) {
+      try {
+        const issuesRef = collection(db, 'issues');
+        const q = query(issuesRef, where("userId", "==", user.uid), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+          historyContainer.innerHTML = '<p>You have not reported any issues yet.</p>';
+        } else {
+          historyContainer.innerHTML = ''; 
+          querySnapshot.forEach((doc) => {
+            const issue = doc.data();
+            const date = issue.createdAt.toDate().toLocaleDateString("en-IN");
+            const issueCardHTML = `
+              <div class="issue-card">
+                <img src="${issue.imageUrl}" alt="Issue Image">
+                <div class="issue-card-details">
+                  <h3>${issue.issues.join(', ')}</h3>
+                  <p><strong>Status:</strong> ${issue.status}</p>
+                  <p class="date"><strong>Reported on:</strong> ${date}</p>
+                </div>
+              </div>
+            `;
+            historyContainer.innerHTML += issueCardHTML;
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching history:", error);
+        historyContainer.innerHTML = '<p>Sorry, we could not load your history. Check the console for errors.</p>';
+      }
+    }
+  </script>
+</body>
+</html>

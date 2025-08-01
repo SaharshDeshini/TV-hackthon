@@ -1,0 +1,171 @@
+/* =========================================
+   PROFESSIONAL & ROBUST AUTHENTICATION CSS
+   ========================================= */
+
+/* --- Fonts and Global Styles --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --clr-primary: #0d6efd; /* Bootstrap Blue for a familiar, professional feel */
+  --clr-primary-light: #408cfd;
+  --clr-success: #198754;
+  --clr-error: #dc3545;
+  --clr-bg-body: #f8f9fa;
+  --clr-bg-card: #ffffff;
+  --clr-border: #dee2e6;
+  --clr-text: #212529;
+  --clr-text-muted: #6c757d;
+  --radius: 0.5rem;
+  --shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  --font-base: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--clr-bg-body);
+  color: var(--clr-text);
+  font-family: var(--font-base);
+  line-height: 1.6;
+}
+
+/* --- Authentication Card --- */
+.auth-card {
+  background-color: var(--clr-bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-card h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* --- Forms & Inputs --- */
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-card label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+}
+
+.auth-card input {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: var(--font-base);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  padding: 0.85rem 0;
+  background-color: var(--clr-primary);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.btn-primary:hover {
+  background-color: var(--clr-primary-light);
+  transform: translateY(-2px);
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  background-color: #fff;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.btn-google img {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.btn-google:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Status & Footer --- */
+#auth-status {
+  min-height: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--clr-error);
+  text-align: center;
+  font-weight: 500;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+.auth-footer a {
+  color: var(--clr-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* --- Dashboard Specific Styles --- */
+.dashboard-container {
+  text-align: center;
+  padding: 3rem;
+}
+.dashboard-container h1 {
+  margin-bottom: 0.5rem;
+}
+.dashboard-container #user-email {
+  color: var(--clr-success);
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+#logout-btn {
+  background-color: var(--clr-error);
+}
+#logout-btn:hover {
+  background-color: #e44d5a;
+}

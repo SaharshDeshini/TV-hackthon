@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submission History - AI Maintenance Portal</title>
+  <style>
+    /* --- General Styling --- */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+    :root {
+      --primary-color: #00aaff;
+      --dark-color: #1a1a1a;
+      --light-color: #f4f4f4;
+      --star-color: #ccc;
+      --star-color-hover: #ffc107;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: var(--light-color); background-color: var(--dark-color); }
+    .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; align-items: center; }
+    .chatbot-btn, .profile-btn { background: rgba(255, 255, 255, 0.1); color: var(--light-color); border: 1px solid rgba(255, 255, 255, 0.3); padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 16px; text-decoration: none; }
+    .profile-dropdown { position: relative; }
+    .dropdown-content { display: none; position: absolute; right: 0; top: 120%; background-color: var(--dark-color); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); border-radius: 5px; z-index: 1; overflow: hidden; }
+    .dropdown-content a { color: var(--light-color); padding: 12px 16px; text-decoration: none; display: block; }
+    .dropdown-content a:hover { background-color: var(--primary-color); }
+    .show { display: block; }
+    .content-wrapper { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; min-height: 100vh; padding: 80px 20px 20px; }
+    header h1 { color: #00d4ff; margin-bottom: 30px; }
+    /* --- History Page Styles --- */
+    .history-list { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
+    .issue-card { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; padding: 20px; display: flex; gap: 20px; text-align: left; }
+    .issue-card img { width: 150px; height: 150px; object-fit: cover; border-radius: 5px; }
+    .issue-card-details { flex-grow: 1; }
+    .issue-card-details h3 { color: var(--primary-color); margin-bottom: 10px; text-transform: capitalize; }
+    .issue-card-details .date { font-size: 0.9rem; color: #ccc; margin-top: 10px; }
+    /* --- Styles for Feedback Section & Button --- */
+    .feedback-section { margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    .give-feedback-btn { padding: 8px 12px; background-color: var(--primary-color); color: var(--light-color); border: none; border-radius: 5px; cursor: pointer; }
+    /* --- Styles for Modal --- */
+    .modal-overlay { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+    .modal-content { position: relative; background-color: var(--dark-color); margin: 15% auto; padding: 30px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; width: 90%; max-width: 500px; }
+    .close-btn { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; margin-bottom: 20px; }
+    .star-rating input[type="radio"] { display: none; }
+    .star-rating label { font-size: 30px; color: #ccc; cursor: pointer; }
+    .star-rating input[type="radio"]:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: #ffc107; }
+    .feedback-form button { width: 100%; padding: 12px; border: none; border-radius: 5px; font-size: 18px; font-weight: 700; cursor: pointer; }
+    .feedback-form textarea { width: 100%; min-height: 100px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; color: var(--light-color); }
+  </style>
+</head>
+<body>
+  <div class="top-controls">
+    <a href="dashboard.html" class="chatbot-btn">🏠 Dashboard</a>
+    <div class="profile-dropdown">
+      <button class="profile-btn" id="profile-btn">👤 Profile ▾</button>
+      <div class="dropdown-content" id="dropdown-content">
+        <a href="account.html">Account</a>
+        <a href="history.html">History</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <header><h1>My Submission History</h1></header>
+    <main id="history-container" class="history-list"><p>Loading your submitted issues...</p></main>
+  </div>
+
+  <div id="feedback-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal-btn">&times;</span>
+      <form id="modal-feedback-form" class="feedback-form">
+        <h2>Provide Feedback</h2>
+        <div class="star-rating">
+          <input type="radio" id="modal-star5" name="rating" value="5" required/><label for="modal-star5">★</label>
+          <input type="radio" id="modal-star4" name="rating" value="4" /><label for="modal-star4">★</label>
+          <input type="radio" id="modal-star3" name="rating" value="3" /><label for="modal-star3">★</label>
+          <input type="radio" id="modal-star2" name="rating" value="2" /><label for="modal-star2">★</label>
+          <input type="radio" id="modal-star1" name="rating" value="1" /><label for="modal-star1">★</label>
+        </div>
+        <textarea id="modal-feedback-comment" placeholder="Tell us about the resolution..." required></textarea>
+        <button type="submit">Submit Feedback</button>
+        <p id="modal-status-message"></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="history.js"></script>
+</body>
+</html>
