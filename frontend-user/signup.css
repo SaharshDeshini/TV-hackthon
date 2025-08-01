@@ -54,7 +54,7 @@ body::after {
     backdrop-filter: blur(15px); /* Frosted glass effect */
     -webkit-backdrop-filter: blur(15px); /* For Safari */
     padding: 50px; /* More generous padding */
-    padding-bottom: 0; /* Adjust padding bottom as footer will be outside */
+    padding-bottom: 20px; /* Adjust padding bottom as footer will be outside */
     border-radius: 20px 20px 20px 20px; /* Fully rounded corners */
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Deeper, more prominent shadow */
     text-align: center;
