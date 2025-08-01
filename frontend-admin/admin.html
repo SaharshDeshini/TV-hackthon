@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-light bg-light px-3 shadow-sm">
+        <!-- Hamburger Button to toggle sidebar -->
+        <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-label="Toggle navigation">
+            <i class="bi bi-list" style="font-size: 1.6rem;"></i>
+        </button>
+
+        <!-- Admin Info top right -->
+         <div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+      <div class="avatar-circle-sm"></div> Admin
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li><a class="dropdown-item" href="#" id="admin-logout-btn">Logout</a></li>
+    </ul>
+  </div>
+    </nav>
+
+    <!-- Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+        <div class="offcanvas-header border-bottom border-dark">
+            <div class="d-flex align-items-center gap-2">
+                <div class="admin-logo">A</div>
+                <span class="admin-label">Admin</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <nav class="nav flex-column px-3 mt-3">
+                <a class="nav-link active" href="admin.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                <a class="nav-link" href="worker.html"><i class="bi bi-people me-2"></i>Workers</a>
+                <a class="nav-link" href="issue.html"><i class="bi bi-exclamation-circle me-2"></i>Issues</a>
+                <a class="nav-link" href="feedback.html"><i class="bi bi-chat-left-dots me-2"></i>Feedback</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content px-3 py-4">
+        <div class="dashboard-title mb-2">Dashboard</div>
+        <div class="mb-4 text-secondary">Smart Maintance</div>
+        <div class="dashboard-cards mb-4 d-flex flex-wrap gap-3">
+            <div class="dashboard-card flex-fill min-w-220px">
+                <span class="icon"><i class="bi bi-people"></i></span>
+                <span class="stat" id="total-workers-stat">0</span>
+                <div class="text-secondary mt-1 stat-label">Total Workers</div>
+                <div class="card-positive mt-1 stat-change">+12% vs last month</div>
+            </div>
+            <div class="dashboard-card flex-fill min-w-220px">
+                <span class="icon text-warning"><i class="bi bi-exclamation-triangle"></i></span>
+                <span class="stat" id="active-issues-stat">0</span>
+                <div class="text-secondary mt-1 stat-label">Active Issues</div>
+                <div class="card-negative mt-1 stat-change">-8% vs last month</div>
+            </div>
+            <div class="dashboard-card flex-fill min-w-220px">
+                <span class="icon text-success"><i class="bi bi-check2-circle"></i></span>
+                <span class="stat" id="completed-issues-stat">0</span>
+                <div class="text-secondary mt-1 stat-label">Completed Issues</div>
+                <div class="card-positive mt-1 stat-change">+24% vs last month</div>
+            </div>
+            <div class="dashboard-card flex-fill min-w-220px">
+                <span class="icon text-primary"><i class="bi bi-star-fill"></i></span>
+                <span class="stat" id="avg-rating-stat">0</span>
+                <div class="text-secondary mt-1 stat-label">Avg Rating</div>
+                <div class="card-positive mt-1 stat-change">+5% vs last month</div>
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="recent-activity">
+                    <div class="section-title">Recent Activity</div>
+                    <div class="activity-item">
+                        <div class="activity-dot green"></div>
+                        New worker John Smith registered
+                        <span class="activity-time">2m ago</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot yellow"></div>
+                        Issue #1234 reported
+                        <span class="activity-time">5m ago</span>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot blue"></div>
+                        Issue #1230 resolved
+                        <span class="activity-time">10m ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="quick-actions">
+                    <div class="section-title">Quick Actions</div>
+                    <button class="quick-action-btn">
+                        <i class="bi bi-person-plus"></i> Add New Worker
+                    </button>
+                    <button class="quick-action-btn">
+                        <i class="bi bi-exclamation-triangle"></i> Report Issue
+                    </button>
+                    <button class="quick-action-btn">
+                        <i class="bi bi-bar-chart"></i> View Reports
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle for offcanvas toggle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../frontend-user/auth.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Workers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="worker.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Offcanvas Sidebar -->
+  <div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="offcanvasSidebar">
+    <div class="offcanvas-header">
+      <div class="admin-logo me-2">A</div>
+      <h5 class="admin-label mb-0">Admin Dashboard</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="nav flex-column">
+        <a class="nav-link active" href="admin.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+        <a class="nav-link" href="worker.html"><i class="fas fa-users me-2"></i>Workers</a>
+        <a class="nav-link" href="issue.html"><i class="fas fa-tools me-2"></i>Issues</a>
+        <a class="nav-link" href="feedback.html"><i class="fas fa-comment-dots me-2"></i>Feedback</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-3">
+    <button class="btn btn-outline-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+    <span class="navbar-brand fw-bold">Admin Dashboard</span>
+    <div class="ms-auto dropdown">
+      <button class="btn btn-light dropdown-toggle border shadow-sm" type="button" data-bs-toggle="dropdown">
+        <i class="fas fa-user-circle me-1"></i> Admin
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="#" id="admin-logout-btn">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container-fluid main-content px-4 py-3">
+    <h2 class="fw-bold">Workers</h2>
+    <p class="text-muted">Manage your team members</p>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0"><i class="fas fa-users me-2"></i>Team Overview</h5>
+          <button class="btn btn-primary"><i class="fas fa-plus me-1"></i>Add Worker</button>
+        </div>
+        <div class="row g-2 mb-3">
+          <div class="col-md-10">
+            <input type="text" class="form-control" placeholder="Search workers...">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-outline-secondary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Join Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>John Smith</strong></td>
+                <td>john@example.com</td>
+                <td>Engineering</td>
+                <td><span class="btn btn-sm btn-primary status-btn">Active</span></td>
+                <td>2024-01-15</td>
+              </tr>
+              <tr>
+                <td><strong>Sarah Johnson</strong></td>
+                <td>sarah@example.com</td>
+                <td>Design</td>
+                <td><span class="btn btn-sm btn-primary status-btn">Active</span></td>
+                <td>2024-02-10</td>
+              </tr>
+              <tr>
+                <td><strong>Mike Davis</strong></td>
+                <td>mike@example.com</td>
+                <td>Marketing</td>
+                <td><span class="btn btn-sm btn-light status-btn">Inactive</span></td>
+                <td>2023-12-01</td>
+              </tr>
+              <tr>
+                <td><strong>Emily Chen</strong></td>
+                <td>emily@example.com</td>
+                <td>Sales</td>
+                <td><span class="btn btn-sm btn-primary status-btn">Active</span></td>
+                <td>2024-03-05</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../frontend-user/auth.js"></script>
+  <script type="module" src="admin.js"></script> 
+</body>
+
+</html>
