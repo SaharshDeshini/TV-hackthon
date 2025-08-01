@@ -54,8 +54,8 @@ body::after {
     backdrop-filter: none; /* Removed blur for solid background */
     -webkit-backdrop-filter: none; /* For Safari */
     padding: 40px; /* Decreased padding for a smaller card */
-    padding-bottom: 0; /* Adjust padding bottom as footer will be outside */
-    border-radius: 15px 15px 0 0; /* Slightly less rounded corners */
+    padding-bottom: 20px; /* Adjust padding bottom as footer will be outside */
+    border-radius: 15px 15px 15px 15px; /* Slightly less rounded corners */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Slightly softer shadow */
     text-align: center;
     width: 100%;
